@@ -1,0 +1,104 @@
+/*CUstom Check*/
+.xyz_check_container.checked{
+    border: 1px solid #9b51e0;
+    background: #9b51e0 !important;
+    color: #ffffff !important;
+}
+.xyz_check_container input[type="checkbox"],
+.xyz_check_container input[type="radio"]{
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.xyz_checked{
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 100px;
+    margin-top: 1px;
+}
+.xyz_checked::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    width: 6px;
+    height: 10px;
+    border-color: currentColor;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+}
+.xyz_un_checked{
+    box-sizing: border-box;
+    position: relative;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 100px;
+    margin-top: 1px;
+}
+.xyz_check_container .xyz_un_checked{
+    display: block;
+}
+.xyz_check_container.checked .xyz_un_checked{
+    display: none;
+}
+.xyz_check_container .xyz_checked{
+    display: none;
+}
+.xyz_check_container.checked .xyz_checked{
+    display: block;
+}
+.xyz_check_container label{
+    margin: 0 0 0 10px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+}
+
+.xyz_check_container.blank label,
+.xyz_check_container.blank xyz_checked,
+.xyz_check_container.blank xyz_un_checked
+{
+    display: none !important;
+}
+
+.xyz_flex_col{
+    display: flex;
+}
+.xyz_flex_col .xyz_check_container {
+    margin: 0 10px 0 10px !important;
+}
+.xyz_flex_col .xyz_check_container:first-child {
+    margin: 0 10px 0 0 !important;
+}
+.xyz_flex_col .xyz_check_container:last-child {
+    margin: 0 0 0 10px !important;
+}
+
+.xyz_flex_col .xyz_check_container:first-child:last-child {
+    margin: 0 0 5px 0 !important;
+}
+
+@media only screen and (max-width: 700px) {
+    .xyz_flex_col{
+        display: block !important;
+    }
+
+    .xyz_flex_col .xyz_check_container,
+    .xyz_flex_col .xyz_check_container:first-child,
+    .xyz_flex_col .xyz_check_container:last-child{
+        margin: 0 0 5px 0 !important;
+    }
+}
