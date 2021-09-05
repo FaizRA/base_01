@@ -36,15 +36,10 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'user' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'user2s' => [
-            'driver' => 'session',
-            'provider' => 'user2s',
-        ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -74,12 +69,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        'user2s' => [
-            'driver' => 'eloquent',
-            'model' => \App\Models\User2::class,
-        ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

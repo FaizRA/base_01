@@ -257,5 +257,48 @@
             console.log('armClass')
         }
     }
+</script>
 
+<script>
+    $(document).ready(function (e) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#x_form').on('submit', function(e){
+            loadingON()
+            e.preventDefault();
+            var myForm = document.getElementById('x_form');
+            var formData = new FormData(myForm);
+            var url = myForm.getAttribute('action');
+            $.ajax({
+                type:'POST',
+                url: url,
+                data: formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    if($.isEmptyObject(data.error)){
+                        //Jika tidak ada kesalahan validasi submit Form
+                        $('input[name="action"]').val('submit')
+                        myForm.submit()
+                    }else{
+                        //If Response ada kesalahan validasi
+                        var result = data['error'];
+                        // console.log(result)
+                        $('.the-validation-text').empty()
+                        for(var index in result) {
+                            $('.the-validation-text.'+index).append('* '+result[index][0])
+                        }
+                        loadingOFF()
+                    }
+                },
+            });
+            return  false;
+        });
+    })
 </script>

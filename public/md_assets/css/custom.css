@@ -456,6 +456,10 @@ form #map:after {
     border-radius: 100px;
     margin-top: 1px;
 }
+.xyz_check_container:hover .xyz_un_checked{
+    border: 3px solid var(--elemCol);
+}
+
 .xyz_check_container .xyz_un_checked{
     display: block;
 }
@@ -472,7 +476,7 @@ form #map:after {
     margin: 0 0 0 10px;
     position: relative;
     cursor: pointer !important;
-    top: 3.4px
+    top: 5.4px
 }
 
 .xyz_check_container.blank label,
@@ -511,3 +515,11 @@ form #map:after {
     }
 }
 
+.text-sm{
+    font-size: 0.7rem;
+}
+
+.perfect-scrollbar-on .sidebar, .perfect-scrollbar-on .main-panel {
+    height: auto;
+    max-height: initial;
+}

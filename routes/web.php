@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\TestController;
+use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +22,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/qwert/login', [AuthController::class, 'index']);
+Route::get('/qwert/login', [AuthController::class, 'index'])->name('loginPage');
 Route::post('/qwert/login_process', [AuthController::class, 'loginProcess'])->name('loginProcess');
 
+Route::group(['middleware' => UserAccess::class], function() {
+    Route::get('/qwert', [DashboardController::class, 'index'])->name('admin_dashboard');
+    Route::get('/qwert/log_out', [AuthController::class, 'logoutProcess'])->name('admin_log_out');
+});
 
-Route::get('/testo', [\App\Http\Controllers\TestController::class, 'index']);
+
+Route::get('/testo', [TestController::class, 'index']);
 

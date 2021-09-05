@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>AdminLTE 3 | Log in (v2)</title>
     @include('admin.partial.css')
     <style>
@@ -41,17 +42,21 @@
                     <div class="text-center">
                         <h4 class="font-weight-bold head_text">Admin Login Panel</h4>
                     </div>
-                    <div class="row mt-5 px-5">
+                    <form class="row mt-5 px-5" id="x_form" method="POST" action="{{route('loginProcess')}}">
+                        <input type="text" class="d-none" name="action">
+                        @csrf
                         <div class="col-md-12 my-2">
                             <div class="form-group bmd-form-group">
                                 <label class="bmd-label-floating">E-Mail</label>
-                                <input type="text" class="form-control" name="label" value="{{$query1->label ?? null}}">
+                                <input type="text" class="form-control" name="email" value="">
+                                <span class="email the-validation-text text-sm text-danger font-weight-bold"></span>
                             </div>
                         </div>
                         <div class="col-md-12 my-2">
                             <div class="form-group bmd-form-group">
                                 <label class="bmd-label-floating">Password</label>
-                                <input type="text" class="form-control" name="shipper_name" value="{{$query1->shipper_name ?? null}}">
+                                <input type="password" class="form-control" name="password" value="">
+                                <span class="password the-validation-text text-sm text-danger font-weight-bold"></span>
                             </div>
                         </div>
                         <div class="col-md-12 my-2">
@@ -65,11 +70,11 @@
                             </div>
                         </div>
                         <div class="col-md-12 my-2 text-right">
-                            <button type="button" class="btn btn-primary btn-block btn-lg">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
                                 Login
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -78,42 +83,6 @@
 @include('admin.partial.js')
 @include('admin.partial.js-2')
 <script>
-    // this is the id of the form
-    $(".btn-submit").on('click',function() {
-        var form = $('#mainForm');
-        var url = form.attr('action');
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(), // serializes the form's elements.
-            success: function(data)
-            {
-                console.log(data); // show response from the php script.
-                $('.text-fail').html('')
-                if (data.success===false){
-                    for (var i in data.error){
-                        $('.text-fail.'+i).html('* '+data.error[i][0])
-                    }
-                }else {
-                    $('input[name="action"]').val('submit')
-                    $('#mainForm').submit()
-                }
-            }
-        });
-    });
-
-    $('.pass-switcher').on('click',function (){
-        var input=$(this).attr('data-target');
-        var state=$('input[name="'+input+'"]').attr('type');
-        if (state==='password'){
-            $('input[name="'+input+'"]').attr('type','text');
-            $(this).html('<i class="fas fa-eye"></i>')
-        }else {
-            $('input[name="'+input+'"]').attr('type','password');
-            $(this).html('<i class="fas fa-eye-slash"></i>')
-
-        }
-    })
 </script>
 </body>
 </html>
